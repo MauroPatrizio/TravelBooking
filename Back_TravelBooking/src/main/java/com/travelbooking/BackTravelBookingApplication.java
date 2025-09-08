@@ -1,4 +1,4 @@
-package com.travelbooking.Back_TravelBooking;
+package com.travelbooking;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
