@@ -1,9 +1,9 @@
 package com.travelbooking.DTO;
 
 
-import com.travelbooking.Entities.Puntuacion;
-import com.travelbooking.Entities.Rol;
-import com.travelbooking.Entities.Usuario;
+import com.travelbooking.Entities.Score;
+import com.travelbooking.Entities.Role;
+import com.travelbooking.Entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,24 +16,12 @@ import java.util.List;
 public class UsuarioDTO {
 
     private Long id;
-    private String nombre;
-    private String apellido;
+    private String name;
+    private String surname;
     private String email;
     private String password;
-    private String telefono;
-    private Rol roles;
-    private List<Puntuacion> puntuacion;
+    private String phone;
+    private Role roles;
+    private List<Score> score;
 
-     public Usuario toEntity() {
-        Usuario usuario = new Usuario();
-        usuario.setId(id);
-        usuario.setNombre(nombre);
-        usuario.setApellido(apellido);
-        usuario.setEmail(email);
-        usuario.setPassword(password);
-        usuario.setTelefono(telefono);
-        usuario.setRoles(roles);
-        usuario.setPuntuacion(puntuacion);
-        return usuario;
-    }
 }
