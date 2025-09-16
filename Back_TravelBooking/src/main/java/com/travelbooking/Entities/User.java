@@ -1,14 +1,16 @@
 package com.travelbooking.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.travelbooking.DTO.UsuarioDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -19,34 +21,21 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="users")
-public class User extends Base{
+public class User extends Base implements UserDetails {
 
-    @Pattern(regexp = "^\\S.*",message = "The user name can't start with an invalid char")
-    @NotEmpty(message = "The user must contain a name")
-    @Size(min = 3,max = 50,message = "The user name must be between 3 and 50 chars long")
     @Column(name = "name")
     private String name;
 
-    @Pattern(regexp = "^\\S.*",message = "The user surname can't start with an invalid char")
-    @NotEmpty(message = "The user must contain a surname")
-    @Size(min = 3,max = 50,message = "The user surname must be between 3 and 50 chars long")
     @Column(name = "surname")
     private String surname;
 
-    @Pattern(regexp = "^\\S.*",message = "The user email name can't start with an invalid char")
     @Email(message = "The email must be valid")
-    @NotEmpty(message = "The user must contain a surname")
-    @Size(min = 5,max = 50,message = "The user surname must be between 5 and 50 chars long")
     @Column(name = "email", unique = true)
     private String email;
 
-    @NotEmpty(message = "The user must contain a password")
     @Column(name ="password", length = 300)
     private String password;
 
-    @Pattern(regexp ="^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$",message = "The phone number must be entered in the format '+xx (xxx) xxx-xxxx'")
-    @NotEmpty(message = "The user must contain a phone number")
-    @Size(min = 5,max = 50,message = "The user phone number must be between 5 and 50 chars long")
     @Column(name = "phone")
     private String phone;
 
@@ -59,11 +48,46 @@ public class User extends Base{
     @JsonIgnore
     private List<Score> score;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "user")
     @JsonIgnore
     private Set<Favorite> favorites;
 
-    //Equals y HashCode para comparar objetos por id
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(roles.getName()));
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return Boolean.TRUE.equals(this.getActive());
+    }
+
+    // Equals y HashCode
     @Override
     public boolean equals(Object o){
         if(this == o) return true;
@@ -74,5 +98,4 @@ public class User extends Base{
 
     @Override
     public int hashCode() { return Objects.hash(getId());}
-
 }

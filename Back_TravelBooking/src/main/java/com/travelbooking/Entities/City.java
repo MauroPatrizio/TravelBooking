@@ -28,7 +28,7 @@ public class City extends Base {
     @JoinColumn(name = "country_id", referencedColumnName = "id", nullable = false)
     private Country country;
 
-    //Equals y HashCode para comparar objetos por id
+    //Equals y HashCode to compare objects by ID
     @Override
     public boolean equals(Object o){
         if(this == o) return true;

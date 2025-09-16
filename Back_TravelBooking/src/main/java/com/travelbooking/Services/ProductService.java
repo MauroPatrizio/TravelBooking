@@ -5,7 +5,6 @@ import com.travelbooking.Entities.Product;
 import com.travelbooking.Repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -56,7 +55,7 @@ public class ProductService extends BaseService<Product, Long, ProductRepository
 
     public ProductDTO findDTOById(Long id) throws Exception {
         Optional<Product> entity = repository.findById(id);
-        if (!entity.isPresent()) {
+        if (entity.isEmpty()) {
             throw new Exception("Product not found with id: " + id);
         }
         return toDTO(entity.get());
@@ -75,11 +74,11 @@ public class ProductService extends BaseService<Product, Long, ProductRepository
         return toDTO(repository.save(entity));
     }
 
-    public List<ProductDTO> findAllDTO() throws Exception {
+    public Set<ProductDTO> findAllDTO() throws Exception {
         return repository.findByActiveTrue()
                 .stream()
                 .map(this::toDTO)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public Set<ProductDTO> findByCity(String cityName) {

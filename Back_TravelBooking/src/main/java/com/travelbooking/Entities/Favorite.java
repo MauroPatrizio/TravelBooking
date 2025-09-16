@@ -29,7 +29,7 @@ public class Favorite extends Base{
     @JsonIgnore
     private User user;
 
-    //Equals y HashCode para comparar objetos por id
+    //Equals y HashCode to compare objects by ID
     @Override
     public boolean equals(Object o){
         if(this == o) return true;

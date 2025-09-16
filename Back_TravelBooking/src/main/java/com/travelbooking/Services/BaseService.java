@@ -4,9 +4,8 @@ import com.travelbooking.Entities.Base;
 import com.travelbooking.Repositories.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Transactional
 public abstract class BaseService<T extends Base, ID, Repo extends BaseRepository<T, ID>> {
@@ -18,7 +17,7 @@ public abstract class BaseService<T extends Base, ID, Repo extends BaseRepositor
         this.repository = repository;
     }
 
-    public List<T> findAll() throws Exception {
+    public Set<T> findAll() throws Exception {
         try {
             return repository.findByActiveTrue();
         } catch (Exception e) {
@@ -45,7 +44,7 @@ public abstract class BaseService<T extends Base, ID, Repo extends BaseRepositor
     public T update(ID id, T entity) throws Exception {
         try {
             if (repository.existsById(id)) {
-                entity.setId((Long) id); // keep same ID
+                entity.setId((Long) id);
                 return repository.save(entity);
             } else {
                 throw new Exception("Entity not found with id: " + id);

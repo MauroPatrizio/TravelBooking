@@ -20,7 +20,7 @@ public class Country extends Base {
     @Column(name="name")
     private String name;
 
-    @OneToMany(mappedBy = "countries", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<City> city;
 

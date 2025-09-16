@@ -5,8 +5,6 @@ import com.travelbooking.Entities.User;
 import com.travelbooking.Repositories.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -74,7 +72,7 @@ public class UserService extends BaseService<User, Long, UserRepository> {
     }
 
     public Set<UsuarioDTO> findAllDTO() {
-        List<User> users = repository.findByActiveTrue();
+        Set<User> users = repository.findByActiveTrue();
         return users.stream()
                 .map(this::toDTO)
                 .collect(Collectors.toSet());

@@ -6,8 +6,8 @@ import com.travelbooking.Entities.City;
 import com.travelbooking.Entities.Country;
 import com.travelbooking.Repositories.CityRepository;
 import org.springframework.stereotype.Service;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -67,10 +67,10 @@ public class CityService extends BaseService<City, Long, CityRepository> {
         return toDTO(repository.save(entity));
     }
 
-    public List<CityDTO> findAllDTO() throws Exception {
+    public Set<CityDTO> findAllDTO() throws Exception {
         return repository.findByActiveTrue()
                 .stream()
                 .map(this::toDTO)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 }

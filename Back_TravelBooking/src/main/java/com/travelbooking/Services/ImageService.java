@@ -4,8 +4,8 @@ import com.travelbooking.DTO.ImageDTO;
 import com.travelbooking.Entities.Image;
 import com.travelbooking.Repositories.ImageRepository;
 import org.springframework.stereotype.Service;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,10 +53,10 @@ public class ImageService extends BaseService<Image, Long, ImageRepository> {
         return toDTO(repository.save(entity));
     }
 
-    public List<ImageDTO> findAllDTO() throws Exception {
+    public Set<ImageDTO> findAllDTO() throws Exception {
         return repository.findByActiveTrue()
                 .stream()
                 .map(this::toDTO)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 }

@@ -4,7 +4,6 @@ import com.travelbooking.DTO.RoleDTO;
 import com.travelbooking.Entities.Role;
 import com.travelbooking.Repositories.RoleRepository;
 import org.springframework.stereotype.Service;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -53,7 +52,7 @@ public class RoleService extends BaseService<Role, Long, RoleRepository> {
     }
 
     public Set<RoleDTO> findAllDTO() {
-        List<Role> roles = repository.findByActiveTrue();
+        Set<Role> roles = repository.findByActiveTrue();
         return roles.stream()
                 .map(this::toDTO)
                 .collect(Collectors.toSet());

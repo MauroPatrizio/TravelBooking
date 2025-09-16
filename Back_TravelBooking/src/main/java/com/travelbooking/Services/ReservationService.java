@@ -4,8 +4,6 @@ import com.travelbooking.DTO.ReservationDTO;
 import com.travelbooking.Entities.Reservation;
 import com.travelbooking.Repositories.ReservationRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -54,7 +52,7 @@ public class ReservationService extends BaseService<Reservation, Long, Reservati
 
     public ReservationDTO findDTOById(Long id) throws Exception {
         Optional<Reservation> entity = repository.findById(id);
-        if (!entity.isPresent()) {
+        if (entity.isEmpty()) {
             throw new Exception("Reservation not found with id: " + id);
         }
         return toDTO(entity.get());
@@ -73,11 +71,11 @@ public class ReservationService extends BaseService<Reservation, Long, Reservati
         return toDTO(repository.save(entity));
     }
 
-    public List<ReservationDTO> findAllDTO() {
+    public Set<ReservationDTO> findAllDTO() {
         return repository.findByActiveTrue()
                 .stream()
                 .map(this::toDTO)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public Set<ReservationDTO> findByUserId(Long userId) {

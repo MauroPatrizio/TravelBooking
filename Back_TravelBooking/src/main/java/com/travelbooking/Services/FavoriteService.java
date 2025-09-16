@@ -6,7 +6,6 @@ import com.travelbooking.Entities.Product;
 import com.travelbooking.Entities.User;
 import com.travelbooking.Repositories.FavoriteRepository;
 import org.springframework.stereotype.Service;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -65,11 +64,11 @@ public class FavoriteService extends BaseService<Favorite, Long, FavoriteReposit
         return toDTO(repository.save(entity));
     }
 
-    public List<FavoriteDTO> findAllDTO() throws Exception {
+    public Set<FavoriteDTO> findAllDTO() throws Exception {
         return repository.findByActiveTrue()
                 .stream()
                 .map(this::toDTO)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public Set<FavoriteDTO> findByUserId(Long userId) {
@@ -81,12 +80,12 @@ public class FavoriteService extends BaseService<Favorite, Long, FavoriteReposit
     }
 
     public void deleteByProductId(Long productId, Long userId) {
-        List<Favorite> favorites = repository.findByActiveTrue();
+        Set<Favorite> favorites = repository.findByActiveTrue();
         favorites.stream()
                 .filter(fav -> fav.getProduct() != null && fav.getProduct().getId().equals(productId))
                 .filter(fav -> fav.getUser() != null && fav.getUser().getId().equals(userId))
                 .forEach(fav -> {
-                    fav.setActive(false); // soft delete
+                    fav.setActive(false);
                     repository.save(fav);
                 });
     }
