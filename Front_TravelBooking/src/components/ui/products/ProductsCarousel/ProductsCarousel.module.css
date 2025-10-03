@@ -1,0 +1,87 @@
+.productsCarousel {
+	width: 100%;
+	display: none;
+}
+
+.products__img__carousel h3 img {
+	height: 620px;
+	width: 100%;
+	min-width: 912px;
+}
+
+/* slick overrides */
+:global(.slick-arrow) {
+	z-index: 1;
+	margin: 0 50px;
+	border-radius: 100px;
+}
+
+:global(.slick-next:before),
+:global(.slick-prev:before) {
+	font-size: 35px;
+	border-radius: 100px;
+}
+
+:global(button.slick-arrow.slick-next),
+:global(button.slick-arrow.slick-prev) {
+	width: 35px;
+	height: 35px;
+	padding-top: 2px;
+	background-color: var(--third-color);
+	border-radius: 100px;
+}
+
+:global(button.slick-arrow.slick-prev::before),
+:global(button.slick-arrow.slick-next::before) {
+	opacity: 1 !important;
+}
+
+:global(.slick-dots li.slick-active button:before) {
+	color: var(--principal-color);
+}
+
+:global(.slick-dots) {
+	font-weight: 500;
+	padding-right: 20px;
+	display: flex !important;
+	justify-content: flex-end;
+}
+
+:global(.slick-dots > li) {
+	display: none;
+}
+
+:global(.slick-active) {
+	display: flex !important;
+	position: relative !important;
+}
+
+@media (max-width: 913px) {
+	.productsCarousel {
+		display: unset;
+	}
+	.productsCarousel div div {
+		width: 100%;
+	}
+}
+
+@media (max-width: 500px) {
+	.products__img__carousel h3 img {
+		height: 300px;
+		min-width: unset;
+		width: 100%;
+	}
+	.productsCarousel {
+		display: unset;
+	}
+	:global(.slick-next:before),
+	:global(.slick-prev:before) {
+		font-size: 25px;
+	}
+	:global(button.slick-arrow.slick-next),
+	:global(button.slick-arrow.slick-prev) {
+		width: 25px;
+		height: 25px;
+		padding-top: 2px;
+	}
+}

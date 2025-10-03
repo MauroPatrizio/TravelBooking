@@ -1,0 +1,41 @@
+.navegationBtn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 7.9vh;
+	padding: 20px 0px;
+}
+
+.navegationBtn button {
+	cursor: pointer;
+	align-self: center;
+	box-shadow: 0px 3px 0px rgb(0 0 0 / 12%);
+	background-color: var(--principal-color);
+	border: 1px var(--principal-color) solid;
+	border-radius: 5px;
+	color: #ffffff;
+	padding: 5px 10px;
+}
+
+.navegationBtn p {
+	padding: 0px 10px;
+	font-size: 18px;
+}
+
+.withoutBtn {
+	border: 0px var(--principal-color) solid !important;
+	box-shadow: 0px 0px 0px rgb(0 0 0 / 12%) !important;
+	background-color: white !important;
+}
+
+@media (min-width: 768px) {
+	.navegationBtn {
+		margin-bottom: 5.8vh;
+	}
+}
+
+@media (min-width: 1024px) {
+	.navegationBtn {
+		margin-bottom: 7.6vh;
+	}
+}

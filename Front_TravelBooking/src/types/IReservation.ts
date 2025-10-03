@@ -1,9 +1,10 @@
 import type { IProduct } from "./IProduct";
 
 export interface IReservation {
-  id: string;
-  startDate: string;
-  endDate: string;
-  product: IProduct;
-  userId: string;
+	id: string;
+	fechaInicio: string;
+	fechaFin: string;
+	horaComienzo?: string;
+	producto: IProduct;
+	usuario?: { id: string };
 }

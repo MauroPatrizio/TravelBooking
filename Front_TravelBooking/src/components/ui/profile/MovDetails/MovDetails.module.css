@@ -1,0 +1,59 @@
+.movements__details {
+	line-height: 18px;
+	font-size: 16px;
+	color: #333;
+	display: flex;
+	justify-content: space-between;
+	padding: 8px 30px 8px 30px;
+}
+
+.movements__details_id {
+	width: 35px;
+}
+
+.movements__details_name {
+	width: 250px;
+}
+
+.movements__location {
+	width: 100px;
+}
+
+.movements__country {
+	color: var(--principal-color);
+	font-size: 14px;
+}
+
+.movements__details_text {
+	width: 100px;
+	text-align: start;
+	display: flex;
+	align-items: center;
+}
+
+.movements__check,
+.movements__hour {
+	width: 100px;
+}
+
+@media screen and (max-width: 1000px) {
+	.movements__check {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.movements__details_name {
+		width: 150px;
+		font-size: 15px;
+	}
+	.movements__location {
+		font-size: 15px;
+	}
+	.movements__check {
+		display: none;
+	}
+	.movements__hour {
+		display: none;
+	}
+}

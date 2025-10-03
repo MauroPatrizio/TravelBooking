@@ -1,0 +1,86 @@
+.productsLocation {
+	display: flex;
+	flex-direction: column;
+}
+
+.productsLocation__imgContainer {
+	display: flex;
+	justify-content: center;
+	margin-top: 30px;
+}
+
+.productsLocation__title {
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 28px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: #383b58;
+	padding-bottom: 30px;
+	padding: 40px 40px 0 40px;
+}
+
+.productsLocation__subtitle {
+	font-size: 17px;
+	font-weight: 600;
+	line-height: 28px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: rgb(107, 106, 106);
+	padding-bottom: 30px;
+	padding: 20px 40px 0 40px;
+}
+
+.productsLocation__img {
+	border-radius: 10px;
+	width: 95%;
+}
+
+.line {
+	padding-bottom: 20px;
+	width: 100%;
+	border-bottom: 2px solid var(--principal-color);
+}
+
+/* IDs que deben quedar globales (usados por libs/otros componentes) */
+:global(#productsLocation__img__ph) {
+	display: none;
+}
+:global(#productsLocation__img__tb) {
+	display: none;
+}
+:global(#marker-example) {
+	width: 95% !important;
+}
+
+@media (max-width: 900px) {
+	:global(#productsLocation__img__tb) {
+		display: unset;
+	}
+	.productsLocation__img {
+		width: 91%;
+	}
+	:global(#productsLocation__img__des) {
+		display: none;
+	}
+}
+
+@media (max-width: 500px) {
+	:global(#productsLocation__img__ph) {
+		display: unset;
+		margin-bottom: 10px;
+	}
+	:global(#productsLocation__img__tb) {
+		display: none;
+	}
+	:global(#productsLocation__img__des) {
+		display: none;
+	}
+
+	.productsLocation__imgContainer {
+		margin-top: 0px;
+	}
+	.productsLocation__subtitle {
+		padding: 11px;
+	}
+}

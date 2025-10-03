@@ -1,30 +1,27 @@
+import type { FC } from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./Categories.module.css";
 import ErrorMono from "../helpers/ErrorMono";
 import Loader from "../helpers/Loader";
-import { baseUrl, getAllCategories } from "../constants/urls";
 import { useFilterStore } from "../../../store/filterStore";
+import type { ICategoria } from "../../../types/IProduct";
 
-interface ICategory {
-	id: number;
-	title: string;
-	description: string;
-	imgUrl: string;
-}
+const API_BASE = import.meta.env.VITE_API_BASE_URL as string;
+const EP_GET_ALL_CATEGORIES = import.meta.env.VITE_API_GET_ALL_CATEGORIES as string;
 
-const Categories = () => {
-	const [categories, setCategories] = useState<ICategory[]>([]);
+const Categories: FC = () => {
+	const [categories, setCategories] = useState<ICategoria[]>([]);
 	const { filter, setFilter, setCleanerButtonClass } = useFilterStore();
 
-	const setFilterAndButton = (categ: ICategory) => {
+	const setFilterAndButton = (categ: ICategoria): void => {
 		setFilter(filter !== categ.title ? categ.title : "");
 		setCleanerButtonClass("on");
 	};
 
 	useEffect(() => {
 		axios
-			.get<ICategory[]>(baseUrl + getAllCategories)
+			.get<ICategoria[]>(`${API_BASE}${EP_GET_ALL_CATEGORIES}`)
 			.then((response) => setCategories(response.data))
 			.catch(() => setFilter("error"));
 	}, [setFilter]);

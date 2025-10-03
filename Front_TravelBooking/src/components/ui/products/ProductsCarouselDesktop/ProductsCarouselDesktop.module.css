@@ -1,0 +1,113 @@
+.productsCarouselDesktop {
+	position: relative;
+}
+
+.closeCarousel {
+	display: none;
+}
+
+.modalContent {
+	position: relative;
+}
+
+.productsCarouselDesktop__closeCarousel {
+	position: absolute;
+	z-index: 1;
+	top: 10px;
+	right: 10px;
+	font-size: 20px;
+	color: rgba(56, 59, 88, 0.95);
+	font-weight: 500;
+	cursor: pointer;
+	background-color: white;
+	border-radius: 50%;
+	padding: 2px 8px;
+}
+
+.secondSlider button {
+	display: none !important;
+}
+
+.carousel__img__bot {
+	padding: 5px;
+	background-color: white;
+	border: 5px solid white;
+}
+
+.carousel__img__bot img {
+	height: 97px;
+	border-radius: 7px;
+	width: 130px;
+}
+
+.carousel__img__top {
+	border-radius: 10px;
+	height: 355px;
+	width: 600px;
+}
+
+.secondTitle {
+	padding-top: 10px;
+	background-color: white;
+	width: 600px;
+}
+
+.secondSlider div {
+	height: 110px;
+	border-radius: 0 0 20px 20px;
+}
+
+/* slick overrides */
+:global(.slick-list) {
+	height: 325px;
+	width: 600px;
+	border-radius: 10px 10px 0 0;
+}
+
+:global(.slick-dots) {
+	padding-top: 5px;
+	padding-left: 20px;
+	font-size: 15px;
+	justify-content: center;
+	color: rgb(73, 80, 135);
+}
+
+.carouselDesktopDots {
+	padding-top: 5px;
+}
+
+@media (max-width: 1025px) {
+	.carousel__img__bot img {
+		height: 77px;
+	}
+
+	.secondSlider div {
+		height: 107px;
+		border-radius: 0 0 20px 20px;
+	}
+
+	:global(.slick-list) {
+		height: 250px;
+		width: 500px;
+		border-radius: 10px 10px 0 0;
+	}
+
+	.secondTitle {
+		width: 500px;
+	}
+
+	.secondSlider div {
+		height: 90px;
+	}
+
+	.productsCarouselDesktop__closeCarousel {
+		margin-bottom: 320px;
+		margin-left: 420px;
+	}
+}
+
+@media (max-width: 900px) {
+	:global(.slick-list) {
+		border-radius: unset;
+	}
+}

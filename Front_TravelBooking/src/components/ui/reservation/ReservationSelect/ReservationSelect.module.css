@@ -1,0 +1,67 @@
+.reservationSelect {
+	width: 100%;
+}
+
+:global(.rs__control) {
+	border-radius: 7px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+	display: flex;
+	justify-content: space-between;
+	min-height: 40px;
+}
+
+:global(.rs__placeholder) {
+	font-weight: 500;
+	font-size: 14px;
+	color: gray;
+	padding: 15px 10px;
+}
+
+:global(.rs__value-container) {
+	padding-left: 5px;
+	color: #333;
+	font-size: 16px;
+	display: flex;
+	font-weight: 700;
+}
+
+:global(.rs__single-value) {
+	padding: 15px 10px;
+}
+
+:global(.rs__input-container) {
+	opacity: 0;
+	width: 0;
+}
+
+:global(.rs__option) {
+	color: #333;
+	font-weight: 700;
+	padding: 2px 15px;
+}
+
+:global(.rs__option:hover) {
+	color: #4db6ac;
+	cursor: pointer;
+}
+
+:global(.rs__indicators) {
+	padding-top: 15px;
+}
+
+:global(.rs__dropdown-indicator) {
+	padding-right: 10px;
+	color: #1de9b6;
+	transition: all 1s;
+}
+
+:global(.rs__dropdown-indicator:hover) {
+	color: #00695c;
+	cursor: pointer;
+	opacity: 0.5;
+}
+
+#reservationSelect > div:nth-child(2n) {
+	width: 100% !important;
+}

@@ -3,10 +3,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import { imgEye, imgEyeSlash, warnIcon } from "../styleAux/fontAwesoneIcon";
+import { imgEye, imgEyeSlash, warnIcon } from "../../../styleAux/fontAwesomeIcons";
 import InputComponent from "./InputComponent";
 import SweetAlert from "../helpers/SweetAlert";
-import { baseUrl, postLogin } from "../constants/urls";
 import { useIsLoggedStore } from "../../../store/isLoggedStore";
 import type { IState } from "../../../types/IState";
 import type { IUser } from "../../../types/IUser";
@@ -17,6 +16,9 @@ interface IJwtPayload {
 	lastName: string;
 	email: string;
 }
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL as string;
+const EP_POST_LOGIN = import.meta.env.VITE_API_POST_LOGIN as string;
 
 const Login = () => {
 	const [shown, setShown] = useState(false);
@@ -46,10 +48,13 @@ const Login = () => {
 
 	const postUser = async () => {
 		try {
-			const response = await axios.post<{ tokenDeAcceso: string }>(baseUrl + postLogin, {
-				email: email.field,
-				contraseña: password.field,
-			});
+			const response = await axios.post<{ tokenDeAcceso: string }>(
+				`${API_BASE}${EP_POST_LOGIN}`,
+				{
+					email: email.field,
+					contraseña: password.field,
+				}
+			);
 
 			const token = response.data.tokenDeAcceso;
 			const decoded = jwtDecode<IJwtPayload>(token);
@@ -91,8 +96,7 @@ const Login = () => {
 				setFormLogin(false);
 				setIsLogged(false);
 			}
-		} catch (error) {
-			console.error("Ooops! Ocurrió un error!", error);
+		} catch {
 			setFormLogin(false);
 			setIsLogged(false);
 			SweetAlert.messageError(

@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./ListImageCard.module.css";
 import Loader from "../helpers/Loader";
-import ProductCard from "./ProductCard";
+import ProductCard from "../ProductCard/ProductCard";
 import PaginationButtons from "./productsByPagination/PaginationBottons";
-import { baseUrl, getAllProducts, getFavByUser } from "../constants/urls";
 import { useFilterStore } from "../../../store/filterStore";
 import { useFilterByCityStore } from "../../../store/filterByCityStore";
 import { useIsLoggedStore } from "../../../store/isLoggedStore";
@@ -16,6 +15,10 @@ interface IProduct {
 	ciudad: { city: string };
 	reservas: { fechaInicio: string; fechaFin: string }[];
 }
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL as string;
+const EP_GET_ALL_PRODUCTS = import.meta.env.VITE_API_GET_ALL_PRODUCTS as string;
+const EP_GET_FAV_BY_USER = import.meta.env.VITE_API_GET_FAV_BY_USER as string;
 
 const ListImageCard = () => {
 	const [images, setImages] = useState<IProduct[]>([]);
@@ -85,7 +88,7 @@ const ListImageCard = () => {
 
 	const getImgById = () => {
 		axios
-			.get<IProduct[]>(baseUrl + getAllProducts)
+			.get<IProduct[]>(`${API_BASE}${EP_GET_ALL_PRODUCTS}`)
 			.then((response) => {
 				setImages(response.data);
 			})
@@ -115,7 +118,7 @@ const ListImageCard = () => {
 
 	const getfavById = () => {
 		axios
-			.get(baseUrl + getFavByUser + localStorage.id)
+			.get(`${API_BASE}${EP_GET_FAV_BY_USER}${localStorage.id}`)
 			.then((response) => {
 				pushearFav(response.data);
 			})

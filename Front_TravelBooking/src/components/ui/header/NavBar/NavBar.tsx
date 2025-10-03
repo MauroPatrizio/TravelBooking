@@ -1,9 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
-import { imgBars } from "../../styleAux/fontAwesoneIcon";
+import { imgBars } from "../../../../styleAux/fontAwesomeIcons";
 import LoggedUserNav from "./LoggedUserNav";
 import SocialNet from "../SocialNet";
 import SweetAlert from "../../helpers/SweetAlert";
-
 import { useOpenToggleStore } from "../../../../store/openToggleStore";
 import { useIsLoggedStore } from "../../../../store/isLoggedStore";
 import { useFilterStore } from "../../../../store/filterStore";

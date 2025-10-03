@@ -3,7 +3,7 @@ import { create } from "zustand";
 interface IFilterStore {
 	filter: string;
 	setFilter: (value: string) => void;
-	handleFilter: () => void;
+	handleFilter: VoidFunction;
 
 	filterDate: string[];
 	setFilterDate: (dates: string[]) => void;
@@ -20,11 +20,11 @@ interface IFilterStore {
 	searchByDate: string[];
 	setSearchByDate: (dates: string[]) => void;
 
-	checkInDate: string;
-	setCheckInDate: (date: string) => void;
+	checkInDate: Date | null;
+	setCheckInDate: (date: Date | null) => void;
 
-	checkOutDate: string;
-	setCheckOutDate: (date: string) => void;
+	checkOutDate: Date | null;
+	setCheckOutDate: (date: Date | null) => void;
 
 	searchFilter: boolean;
 	setSearchFilter: (value: boolean) => void;
@@ -40,6 +40,9 @@ interface IFilterStore {
 
 	containsDisabledDates: boolean;
 	setContainsDisabledDates: (value: boolean) => void;
+
+	getCheckInISO?: () => string | null;
+	getCheckOutISO?: () => string | null;
 }
 
 export const useFilterStore = create<IFilterStore>((set, get) => ({
@@ -65,10 +68,10 @@ export const useFilterStore = create<IFilterStore>((set, get) => ({
 	searchByDate: [],
 	setSearchByDate: (dates) => set({ searchByDate: dates }),
 
-	checkInDate: "",
+	checkInDate: null,
 	setCheckInDate: (date) => set({ checkInDate: date }),
 
-	checkOutDate: "",
+	checkOutDate: null,
 	setCheckOutDate: (date) => set({ checkOutDate: date }),
 
 	searchFilter: false,
@@ -85,4 +88,13 @@ export const useFilterStore = create<IFilterStore>((set, get) => ({
 
 	containsDisabledDates: false,
 	setContainsDisabledDates: (value) => set({ containsDisabledDates: value }),
+
+	getCheckInISO: () => {
+		const d = get().checkInDate;
+		return d ? d.toISOString().slice(0, 10) : null;
+	},
+	getCheckOutISO: () => {
+		const d = get().checkOutDate;
+		return d ? d.toISOString().slice(0, 10) : null;
+	},
 }));

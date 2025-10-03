@@ -1,0 +1,38 @@
+.mapContainer {
+	border-radius: 10px;
+	width: 90%;
+	height: 400px;
+}
+
+.info {
+	background: white;
+	width: 200px;
+	height: 120px;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	gap: 6px;
+}
+
+.title {
+	font-size: 14px;
+	font-weight: 700;
+	margin: 0;
+}
+
+.icons {
+	display: flex;
+	gap: 6px;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.addr {
+	font-size: 12px;
+	margin: 0;
+}
+
+/* Mantener el id usado externamente por el contenedor padre */
+:global(#marker-example) {
+	width: 95% !important;
+}
