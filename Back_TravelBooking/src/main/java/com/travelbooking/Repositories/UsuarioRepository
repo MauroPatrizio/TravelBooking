@@ -1,0 +1,43 @@
+package com.travelbooking.Services;
+
+import com.travelbooking.Entities.Usuario;
+import com.travelbooking.Repositories.UsuarioRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+public class UsuarioService extends BaseService {
+
+    private final UsuarioRepository usuarioRepository;
+
+    public Page<Usuario> listar(Pageable pageable) {
+        return usuarioRepository.findAll(pageable);
+    }
+
+    public Usuario obtenerPorId(Long idUsuario) {
+        return usuarioRepository.findById(idUsuario)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
+    }
+
+    @Transactional
+    public void activar(Long idUsuario) {
+        Usuario u = obtenerPorId(idUsuario);
+        if (!u.isActivo()) {
+            u.setActivo(true);
+            usuarioRepository.save(u);
+        }
+    }
+
+    @Transactional
+    public void desactivar(Long idUsuario) {
+        Usuario u = obtenerPorId(idUsuario);
+        if (u.isActivo()) {
+            u.setActivo(false);
+            usuarioRepository.save(u);
+        }
+    }
+}
